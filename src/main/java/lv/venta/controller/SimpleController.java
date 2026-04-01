@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import lv.venta.model.Product;
+import lv.venta.model.ProductType;
+
 @Controller
 @RequestMapping("/simple")
 public class SimpleController {
@@ -26,4 +29,10 @@ public class SimpleController {
 		return "show-data-page"; //tiks paradita show-data-page.html lapa
 	}
 	
+	@GetMapping("/product") //localhost:8080/simple/product
+	public String getProductInPage(Model model) {
+		Product prod = new Product("Abols", 0.99f, 5, "Garsigs", ProductType.fruit);
+		model.addAttribute("package", prod);
+		return "show-one-product-page"; //tiks paradita show-one-product-page.html lapa
+	}
 }
