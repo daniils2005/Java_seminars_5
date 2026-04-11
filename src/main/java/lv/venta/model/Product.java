@@ -1,5 +1,11 @@
 package lv.venta.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,16 +16,31 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString
+@Table(name = "ProductTable")
+@Entity
 public class Product {
 	//1.mainigie
 	@Setter(value = AccessLevel.NONE)
+	@Column(name = "Id")
+	@Id // ka primara atslega
+	@GeneratedValue(strategy = GenerationType.AUTO) //tiks glabata DB automatiski pec auto increment algoritma
 	private long id;
+	
+	@Column(name = "Title")
 	private String title;
+	
+	@Column(name = "Price")
 	private float price;
+	
+	@Column(name = "Quantity")
 	private int quantity;
+	
+	@Column(name = "Description")
 	private String description;
+	
+	@Column(name = "ProductType")
 	private ProductType productType;
-	private static long counter = 0;
+
 	//2.getters - nak no lombok bibliotekas
 	//3.setters - nak no lombok bibliotekas
 	//4.abi konstruktori - bez argumenta konstruktors nak no lombok bibliotekas
@@ -29,7 +50,6 @@ public class Product {
 		setPrice(inputPrice);
 		setQuantity(inputQuantity);
 		setProductType(inputProductType);
-		id = counter++;
 	}
 	//5. toString - nak no lombok bibliotekas
 	//6. parejas funkcijas
