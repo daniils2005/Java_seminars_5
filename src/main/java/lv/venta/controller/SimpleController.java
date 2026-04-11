@@ -39,7 +39,7 @@ public class SimpleController {
 	}
 	
 	@GetMapping("/products") //localhost:8080/simple/products
-	public String getProductsInPage(Model model) {
+	public String getAllProductsInPage(Model model) {
 		ArrayList<Product> products = new ArrayList<Product>();
 		Product prod1 = new Product("Abols", 0.99f, 5, "Garsigs", ProductType.fruit);
 		Product prod2 = new Product("Banans", 0.66f, 12, "Dzeltens", ProductType.fruit);
