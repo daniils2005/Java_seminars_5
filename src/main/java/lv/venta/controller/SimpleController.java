@@ -7,6 +7,7 @@ import java.util.Random;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import lv.venta.model.Product;
@@ -47,5 +48,19 @@ public class SimpleController {
 		products.addAll(Arrays.asList(prod1, prod2, prod3));
 		model.addAttribute("package", products);
 		return "show-multiple-products-page";
+	}
+	
+	@GetMapping("/add")//localhost:8080/simple/add
+	public String getAddNewProduct(Model model) {
+		//lai izveidotu jaunu produktu, iedodam nokluseto produktu, kuru pec tam vares aizpildit html puse
+		model.addAttribute("product", new Product());
+		return "add-new-product-page"; //tiks paradita add-new-product-page.html lapa
+	}
+	
+	@PostMapping("/add")
+	public String postAddNewProduct(Product product) {
+		//TODO veic datu parbaudi un saglabasanu
+		System.out.println(product);
+		return "redirect:/simple/page";
 	}
 }

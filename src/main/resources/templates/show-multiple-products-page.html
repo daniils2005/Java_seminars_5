@@ -1,14 +1,14 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<body>
 		<h1>Visi produkti mana veikala(dati no JAVAS puses)</h1>
-		<table>
-			<tr th:each="tempP : ${package}">
-				<td th:text="${tempP.id}"></td>
-				<td th:text="${tempP.title}"></td>
-				<td th:text="${tempP.price}"></td>
-				<td th:text="${tempP.description}"></td>
-				<td th:text="${tempP.quantity}"></td>
-				<td th:text="${tempP.productType}"></td>
+		<table style="width: 100%; border-collapse: collapse;">
+			<tr style="border: 1px solid black;" th:each="tempP : ${package}">
+				<td style="border: 1px solid black;" th:text="${tempP.id}"></td>
+				<td style="border: 1px solid black;" th:text="${tempP.title}"></td>
+				<td style="border: 1px solid black;" th:text="${tempP.price}"></td>
+				<td style="border: 1px solid black;" th:text="${tempP.description}"></td>
+				<td style="border: 1px solid black;" th:text="${tempP.quantity}"></td>
+				<td style="border: 1px solid black;" th:text="${tempP.productType}"></td>
 			</tr>
 		</table>
 	</body>
