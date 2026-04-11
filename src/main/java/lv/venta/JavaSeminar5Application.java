@@ -32,11 +32,7 @@ public class JavaSeminar5Application {
 				prodRepo.save(prod2);
 				prodRepo.save(prod3);
 				
-				prodRepo.
-				
-				
 			}
-		}
+		};
 	}
-	
 }
