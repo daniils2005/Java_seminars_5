@@ -18,8 +18,21 @@ public class ProductCRUDServiceImpl implements IProductCRUDService {
 	
 	@Override
 	public void create(String title, float price, int quantity, String description, ProductType type) throws Exception {
-		// TODO Auto-generated method stub
+		if(title == null || !title.matches("[A-Z]{1}[a-z ]{2,30}") || price < 0 || price > 1000 || quantity < 0 || quantity > 100 || description == null || !description.matches("[A-Za-z1-9]{0,400}") || type == null) {
+			throw new Exception("Kads no ievades argumentiem nav atbilstoss");
+		}
+		//parbaudam, vai tads produkts jau eksiste, ja ta, tad papildinam krajumus
+		if(prodRepo.existsByTitleAndPriceAndDescriptionAndProductType(title, price, description, type)) {
+			Product productFromDB = prodRepo.findByTitleAndPriceAndDescriptionAndProductType(title, price, description, type);
+			
+			int newQuantity = productFromDB.getQuantity() + quantity;
+			productFromDB.setQuantity(newQuantity);
+			prodRepo.save(productFromDB); //izpildas UPDATE vaicajums
 		
+		} else {
+			Product newProduct = new Product(title, price, quantity, description, type);
+			prodRepo.save(newProduct); //izpildas INSERT INTO vaicajums
+		}
 	}
 
 	@Override
@@ -29,7 +42,7 @@ public class ProductCRUDServiceImpl implements IProductCRUDService {
 		}
 		
 		ArrayList<Product> allProductsFromDB = (ArrayList<Product>)prodRepo.findAll();
-		return null;
+		return allProductsFromDB;
 	}
 
 	@Override
@@ -46,17 +59,16 @@ public class ProductCRUDServiceImpl implements IProductCRUDService {
 
 	@Override
 	public void updateById(long id, String title, float price, int quantity, String description, ProductType type) throws Exception {
-		if(id <= 0) {
-			throw new Exception("id nevar but negativs vai 0");
+		Product productForUpdating = prodRepo.findByTitleAndPriceAndDescriptionAndProductType(title, price, description, type);
+		if(title == null || !title.matches("[A-Z]{1}[a-z ]{2,30}") || price < 0 || price > 1000 || quantity < 0 || quantity > 100 || description == null || !description.matches("[A-Za-z1-9]{0,400}") || type == null) {
+			throw new Exception("Kads no ievades argumentiem nav atbilstoss");
 		}
-		if(!prodRepo.existsById(id)) {
-			throw new Exception("neeksiste produkts ar id " + id);
-		}
-		Product productForUpdating = prodRepo.findById(id).get();
-		productForUpdating.setTitle(title);
-		productForUpdating.setPrice(price);
-		productForUpdating.setQuantity(quantity);
 		productForUpdating.setDescription(description);
+		productForUpdating.setPrice(price);
+		productForUpdating.setProductType(type);
+		productForUpdating.setQuantity(quantity);
+		productForUpdating.setTitle(title);
+		prodRepo.save(productForUpdating);
 	}
 
 	@Override
