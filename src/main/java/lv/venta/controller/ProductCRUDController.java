@@ -15,12 +15,13 @@ public class ProductCRUDController {
 	@Autowired
 	private IProductCRUDService prodService;
 	
-	@GetMapping("/all") //loclahost:8080/product/crud/all
+	@GetMapping("/all") //localhost:8080/product/crud/all
 	public String getAllProducts(Model model) {
 		try {
 			model.addAttribute("package", prodService.retrieveAll());
 			return "show-all-products-page"; //tiks paradita show-all-products-page.html lapa
 		} catch(Exception e) {
+			model.addAttribute("package", e.getMessage());
 			return "error-page";
 		}
 	}
