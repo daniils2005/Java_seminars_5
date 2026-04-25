@@ -56,15 +56,21 @@ public class ProductCRUDController {
 		}
 	}
 	
-	@GetMapping("/create")//localhost:8080/product/crud/create
+	@GetMapping("/add")//localhost:8080/product/crud/add
 	public String getAddNewProduct(Model model) {
-		model.addAttribute();
+		model.addAttribute("product", new Product());
 		return "add-new-product-page";
 	}
 	
-	@PostMapping("/create")
-	public String postAddNewProduct(Product product) {
-		
-		return "show-all-products-page";
+	@PostMapping("/add")
+	public String postAddNewProduct(Product product, Model model) {
+		try {
+			prodService.create(product.getTitle(), product.getPrice(), product.getQuantity(), product.getDescription(), product.getProductType());
+			//ja ir redirect, tad uz URL adresi parmet (ne lapu)
+			return "redirect:/product/crud/all";
+		} catch (Exception e) {
+			model.addAttribute("package", e.getMessage());
+			return "error-page";
+		}
 	}
 }
