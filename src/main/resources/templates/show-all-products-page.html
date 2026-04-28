@@ -1,6 +1,6 @@
 <html xmlns:th="http://www.thymeleaf.org">
 	<body>
-		<h1>Visi produkti manas datubāzes</h1>
+		<h1 th:text="${myHeader}">Visi produkti mana veikala (dati no JAVAS puses)</h1>
 		<table style="width: 100%; border-collapse: collapse;">
 			<tr style="border: 1px solid black;" th:each="tempP : ${package}">
 				<td style="border: 1px solid black;" th:text="${tempP.id}"></td>

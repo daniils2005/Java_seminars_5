@@ -4,7 +4,7 @@
 <body>
 
 	<h1>Ludzu redige produkta datus</h1>
-	<form method="post" th:object="${product}" th:action="@{/simple/update}" >
+	<form method="post" th:object="${product}" th:action="@{/product/crud/update/__${id}__}" >
 	<table>
 		<tr>
 			<td>Nosaukums:</td>

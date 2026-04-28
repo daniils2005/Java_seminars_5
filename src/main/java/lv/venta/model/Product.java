@@ -51,7 +51,7 @@ public class Product {
 	
 	@Column(name = "Description")
 	@NotNull(message = "Aprakstam jabut realam") //var padot message kuru izprinte, ja validacija neizdodas
-	@Pattern(regexp = "[A-Za-z1-9]{0,400}")
+	@Pattern(regexp = "[A-Za-z1-9]{0,400}", message = "Var saturet tikai burtus un ciparus") //vairs neradisies automatiski generetais teksts, ja notiek validacijas kluda
 	private String description;
 	
 	@Column(name = "ProductType")
