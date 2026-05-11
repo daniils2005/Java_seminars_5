@@ -21,8 +21,8 @@ public interface IProductRepo extends CrudRepository<Product, Long> {
 
 	ArrayList<Product> findByProductType(ProductType type);
 
-	ArrayList<Product> findByTitleContainingOrDescriptionContaining(String keyword, String keyword2);
-
 	@Query(nativeQuery = true, value = "SELECT AVG(price) FROM product_table;")
 	float calculateAvgPriceFromDB();
+
+	ArrayList<Product> findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(String keyword, String keyword2);
 }

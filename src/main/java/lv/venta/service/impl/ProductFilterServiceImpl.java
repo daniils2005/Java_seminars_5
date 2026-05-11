@@ -52,7 +52,7 @@ public class ProductFilterServiceImpl implements IProductFilterService {
 			throw new Exception("Nav padots atslegas vards");
 		}
 		
-		ArrayList<Product> result = prodRepo.findByTitleContainingOrDescriptionContaining(keyword, keyword);
+		ArrayList<Product> result = prodRepo.findByTitleContainingIgnoreCaseOrDescriptionContainingIgnoreCase(keyword, keyword);
 		
 		if(result.isEmpty()) {
 			throw new Exception("Sistema nav produktu, kuru nosaukums vai apraksts satur " + keyword);

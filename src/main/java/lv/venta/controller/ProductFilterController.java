@@ -50,12 +50,12 @@ public class ProductFilterController {
 		}
 	}
  
-	@GetMapping("/keyword/{keyword}") //localhost:8080/product/filter/type/vegetable
+	@GetMapping("/keyword/{keyword}") //localhost:8080/product/filter/keyword/garsigs
 	public String getFilterProductByKeyword(@PathVariable(name = "keyword") String keyword, Model model) {
 		try {
 			ArrayList<Product> productsFromDB = prodFilterService.filterByKeyword(keyword);
 			model.addAttribute("package", productsFromDB);
-			model.addAttribute("myHeader", "" + keyword);
+			model.addAttribute("myHeader", "Meklēju: " + keyword);
 			return "show-all-products-page";
 		} catch(Exception e) {
 			model.addAttribute("package", e.getMessage());
